@@ -1,0 +1,227 @@
+<!DOCTYPE html> 
+<html lang="en"> 
+  <head>
+    <meta charset="utf-8">
+    <title>
+    </title>
+    <meta name="author" content="">
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" type="text/css" href="styles.css">
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script> 
+    <script async>
+
+
+//Populates a matrix with the number of rows and the number of ind (columns)
+      var popMatrix = function(rows,ind,mines) {
+        var mineArray = [];
+        for(var i = 0; i < mines; i++) {
+          mineArray.push("&#9762;");
+        }
+
+//For loop to randomize the adding of mines or zeros to the rowArr and then pushed to the matrix array
+        var rowFill = function(ind) {
+          var rowArr = [];
+          for(var n = 0; n < ind; n++) {
+            rowArr.push(0);
+          }
+          return rowArr;
+        };
+
+          var matrix = []; //Matrix to be populated by number of rows indicated        
+          for(var j = 0; j < rows; j++) { 
+               matrix.push(rowFill(ind));
+          }
+//Remove a mine and add it to the matrix array        
+
+          while(mineArray[0] === "&#9762;") {
+            var randomRow = Math.floor(Math.random() * rows);
+            var randomInd = Math.floor(Math.random() * ind);
+            
+            if(matrix[randomRow][randomInd] === 0) {
+              matrix[randomRow][randomInd] = mineArray.shift();
+            } else if(matrix[randomRow][randomInd] === "&#9762;") {
+              matrix[randomRow][randomInd] = "&#9762;"; 
+            } else {
+              matrix[randomRow][randomInd] = 0; 
+          }               
+          }
+        return matrix;
+        };
+
+//Function for initiating loss if mine left clicked and for clearing zeros in proximity 
+    var clickLossClear = function(td) {
+            if(td.textContent === "☢") {
+              $("#minesweeper").addClass("fxl bg-000000 ff tac fc-FFFFFF b").text("Sorry, you just blew up, but not in a good way! You'll do better next time!"); 
+            }
+            $(td).removeClass("bg-f47503");
+            $("img", td).remove();
+            if(td.lastChild !== "0") {
+              $(td).removeClass("f0");
+            }
+            if(td.textContent === "0") {
+//Clears a clicked zero, its neighboring zeros and shows all touching non-mine numbers.
+        var tableCells = $("td");
+        var clearZeros = function(rows, ind, tableCells) {
+          var cellCount = tableCells.length;
+          for(var i = 0; i < cellCount; i++) {
+                for(var n = -1; n <= 1; n++) {
+                  if(tableCells[i].textContent === "0") {
+                    if(((((i + n)%8) >= 0) && ((j + n) >= 0) && ((i + m) < rows) && ((j + n) < ind))) {
+                      if(matrix[i + m][j + n] !== "&#9762;") {
+                        matrix[i + m][j + n]++;
+                      }
+                    }  
+                  }
+                }
+              }
+            }
+          }
+        };
+
+
+
+//Adds click functionality for removing the image, showing text, clearing free cells,
+//adding flags and losing if mine clicked.
+    var clickAction = function(event) {
+      document.oncontextmenu = function() {return false;};
+      $('td').mousedown(function(event) {
+        var imgSrc = $("img", this).attr("src");
+        switch (event.which) {
+          case 1:
+            clickLossClear(this);
+            break;
+          case 2:
+            alert('Middle Mouse button pressed.');
+            break;
+          case 3:
+            if(imgSrc === "thumbtack.svg") {  
+            $("img", this).attr("src", "thumbtack_reverse.svg");
+            $(this).addClass("bg-f47503");
+            }
+            if(imgSrc === "thumbtack_reverse.svg") {
+            $("img", this).attr("src", "question_mark.svg");
+            $(this).addClass("bg-f47503");
+            }
+            if(imgSrc === "question_mark.svg") {
+            $("img", this).attr("src", "thumbtack.svg");
+            $(this).removeClass("bg-f47503");
+            }
+            if(imgSrc === "") {
+            $(this).removeClass("bg-f47503");
+            }
+            break;
+          default:
+            alert('You have a strange Mouse!');
+        }
+      });
+    };
+
+
+//Creates the visual game board and populate it with the values from the popMatrix function. 
+    var visualMatrixJS = function(rows, ind, matrix) {
+      for(var i = 0; i < rows; i++) { 
+        document.getElementById("minesweeper").insertRow(i);
+        for(j = 0; j < ind; j++) { 
+          var tableRow = document.getElementById("minesweeper").getElementsByTagName("tr")[i];
+          tableRow.insertCell(j).className="fsm b ff minw minh pt pb phl phr tac brdr-sld brdr-sp0 cp f0 fc-F47503";
+          tableRow.getElementsByTagName("td")[j].setAttribute("onclick", "clickAction(this)");
+          tableRow.getElementsByTagName("td")[j].innerHTML=matrix[i][j];
+        }
+      }
+    };
+
+//Adds the nearby minecount.
+    var mineProximity = function(rows, ind, matrix) {
+      for(var i = 0; i < rows; i++) {
+        for(var j = 0; j < ind; j++) {
+          for(var m = -1; m <= 1; m++) {
+            for(var n = -1; n <= 1; n++) {
+              if(matrix[i][j] === "&#9762;") {
+                if((((i + m) >= 0) && ((j + n) >= 0) && ((i + m) < rows) && ((j + n) < ind))) {
+                  if(matrix[i + m][j + n] !== "&#9762;") {
+                    matrix[i + m][j + n]++;
+                  }
+                }  
+              }
+            }
+          }
+        }
+      }
+    };
+
+
+      
+//Checks to ensure all mines are flagged properly to display if won or lost
+    var minesFlagged = function() {
+      var cells = $("td");
+      for(var i = 0; i < cells.length; i++) {
+        if($("img", cells[i]).attr("src") !== "thumbtack_reverse.svg" && $("td")[i].textContent === "☢") {
+          $("#minesweeper").addClass("fxl bg-000000 ff tac fc-FFFFFF b").text("Sorry, you flagged incorrectly! You'll do better next time!"); 
+        }
+          else if($("img", cells[i]).attr("src") === "thumbtack_reverse.svg" && $("td")[i].textContent !== "☢") {
+          $("#minesweeper").addClass("fxl bg-000000 ff tac fc-FFFFFF b").text("Sorry, you flagged incorrectly! You'll do better next time!"); 
+          }
+        }
+        if($("img", "td:contains('☢')").attr("src") === "thumbtack_reverse.svg") { 
+              $("#minesweeper").addClass("fxl bg-f47503 ff tac fc-FFFFFF b").text("WELL PLAYED MINESWEEPER! YOU WIN!"); 
+            }
+    };
+
+//Cheat to show location of mines.
+    var showMines = function() {
+      var mineImg = $("img", "td:contains('☢')"); 
+      var imgSrc = $("img", "td:contains('☢')").attr("src"); 
+      $("img", "td:contains('☢')").hide();
+      $("td:contains('☢')").removeClass('f0');
+      if(imgSrc === "thumbtack_reverse.svg" || "question_mark.svg") {
+        $("td:contains('☢')").has("img[src='thumbtack_reverse.svg']").removeClass("bg-f47503");
+        $("td:contains('☢')").has("img[src='question_mark.svg']").removeClass("bg-f47503");
+        setTimeout(function(){
+          $("td:contains('☢')").has("img").addClass("f0");
+          $("img", "td:contains('☢')").show();   
+          if(imgSrc === "thumbtack_reverse.svg" || "question_mark.svg") {
+            $("td:contains('☢')").has("img[src='thumbtack_reverse.svg']").addClass("bg-f47503");
+            $("td:contains('☢')").has("img[src='question_mark.svg']").addClass("bg-f47503");
+          }
+        }, 2000);
+      }
+    }; 
+
+    var rows = 8;
+    var ind = 8;
+    var mines = 10;
+
+          $(document).ready(function() {
+            var matrix = popMatrix(rows, ind, mines);
+            mineProximity(rows, ind, matrix); 
+            visualMatrixJS(rows, ind, matrix);    
+            $('td').prepend('<img height="30%" src="thumbtack.svg" />');
+            clickAction(event);
+          });
+          
+    </script>
+
+      
+  </head>
+  <body>
+
+    <ul class="p0 list-h">
+      <li class="vat"><button class="ff fsm mts mbs mlm phlm phrm bg-f47503 fc-FFFFFF brdr-n" onclick="location.reload()">New Game</button></li>
+      <li class="vab"><button class="brdr-n ml phll phrl bg-FFFFFF" onclick="minesFlagged()"><img height="70px" src="smiling_yellow.svg" /></button></li>
+
+    </ul>
+
+
+
+
+
+    <table id="minesweeper" class="minh50 mlm mrm">
+      
+    </table>      
+    <ul class="p0 list-h">
+      <li class="vat"><button class="brdr-n ml phl phr bg-FFFFFF" onclick="showMines()"><img height="30px" src="top-secret.svg" /></button></li>
+
+    </ul>
+  </body>
+</html>
