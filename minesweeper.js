@@ -1,3 +1,9 @@
+//JavaScript MINESWEEPER
+
+//Board Size
+var rows = 8;
+var ind = 8;
+var mines = 10;
 
 //Populates a matrix with the number of rows and the number of ind (columns)
 var popMatrix = function(rows,ind,mines) {
@@ -14,13 +20,14 @@ var popMatrix = function(rows,ind,mines) {
     }
     return rowArr;
   };
-
-  var matrix = []; //Matrix to be populated by number of rows indicated        
+  
+  //Matrix to be populated by number of rows indicated        
+  var matrix = []; 
   for(var j = 0; j < rows; j++) { 
     matrix.push(rowFill(ind));
   }
+  
   //Remove a mine and add it to the matrix array        
-
   while(mineArray[0] === "&#9762;") {
     var randomRow = Math.floor(Math.random() * rows);
     var randomInd = Math.floor(Math.random() * ind);
@@ -36,7 +43,7 @@ var popMatrix = function(rows,ind,mines) {
   return matrix;
 };
 
-//Function for initiating loss if mine left clicked and for clearing zeros in proximity 
+//Function for initiating loss if mine left clicked and built in function for clearing zeros in proximity recurisvely 
 var clickLossClear = function(td) {
   var recursiveClear = function(clickedCell) {
     var trLength = $("tr:eq(0)").children().length;
@@ -99,7 +106,6 @@ var clickLossClear = function(td) {
   }
 };
 
-
 //Adds click functionality for removing the image, showing text, clearing free cells,
 //adding flags and losing if mine clicked.
 var clickAction = function(event) {
@@ -136,7 +142,6 @@ var clickAction = function(event) {
   });
 };
 
-
 //Creates the visual game board and populate it with the values from the popMatrix function. 
 var visualMatrixJS = function(rows, ind, matrix) {
   for(var i = 0; i < rows; i++) { 
@@ -168,8 +173,6 @@ var mineProximity = function(rows, ind, matrix) {
     }
   }
 };
-
-
 
 //Checks to ensure all mines are flagged properly to display if won or lost
 var mineCheck = function() {
@@ -208,10 +211,7 @@ var showMines = function() {
   }
 }; 
 
-var rows = 8;
-var ind = 8;
-var mines = 10;
-
+//Loads all functions needed for gameplay after the DOM loads
 $(document).ready(function() {
   var matrix = popMatrix(rows, ind, mines);
   mineProximity(rows, ind, matrix); 
