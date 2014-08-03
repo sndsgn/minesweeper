@@ -534,6 +534,15 @@ code:hover {
 
 /*Sizing*/
 
+.hi {
+  height: initial;}
+
+.hin {
+  height: inherit;}
+
+.hl {
+  height: 3.00rem;}
+
 .minw50 {
   min-width: 50%;}
 
