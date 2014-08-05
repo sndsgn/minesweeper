@@ -310,6 +310,10 @@ code:hover {
 .phln {
   padding-left: 0rem;
 }
+
+.ptxs {
+	padding-top: .25rem;}
+
 .pts {
 	padding-top: .5rem;}
 
@@ -324,6 +328,9 @@ code:hover {
 
 .ptl {
 	padding-top: 2rem;}
+
+.pbxs {
+  padding-bottom: .25rem;}
 
 .pbs {
   padding-bottom: .5rem;}
@@ -342,6 +349,10 @@ code:hover {
 
 .phl {
 	padding-left: 1rem;}
+
+.phlxs {
+  padding-left: .25rem;}
+
 
 .phlsm {
   padding-left: 1.5rem;}
@@ -533,6 +544,10 @@ code:hover {
 
 /*Sizing*/
 
+
+table { 
+  table-layout: fixed; }
+
 .hi {
   height: initial;}
 
@@ -540,16 +555,16 @@ code:hover {
   height: inherit;}
 
 .hl {
-  height: 3.00rem;}
+  height: 2rem;}
 
 .minw50 {
   min-width: 50%;}
 
 .minh {
-  min-height: 6rem;}
+  min-height: 3rem;}
 
 .minw {
-  min-width: 6rem;}
+  min-width: 3rem;}
 
 .minw12P3 {
   min-width: 12.3rem;}

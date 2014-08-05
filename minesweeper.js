@@ -148,7 +148,7 @@ var visualMatrixJS = function(rows, ind, matrix) {
     document.getElementById("minesweeper").insertRow(i);
     for(j = 0; j < ind; j++) { 
       var tableRow = document.getElementById("minesweeper").getElementsByTagName("tr")[i];
-      tableRow.insertCell(j).className="fm b ff minw minh pts pbs phls phrs tac brdr-sld brdr-sp0 cp f0 fc-F47503";
+      tableRow.insertCell(j).className="f b ff minw minh pts pbs tac brdr-sld brdr-sp0 cp f0 fc-F47503 hl";
       tableRow.getElementsByTagName("td")[j].setAttribute("onclick", "clickAction(this)");
       tableRow.getElementsByTagName("td")[j].innerHTML=matrix[i][j];
     }
@@ -216,7 +216,7 @@ $(document).ready(function() {
   var matrix = popMatrix(rows, ind, mines);
   mineProximity(rows, ind, matrix); 
   visualMatrixJS(rows, ind, matrix);    
-  $('td').prepend('<img class="" src="thumbtack.svg" />');
+  $('td').prepend('<img class="hin" src="thumbtack.svg" />');
   clickAction(event);
 });
 
