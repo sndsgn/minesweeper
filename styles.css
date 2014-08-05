@@ -544,10 +544,6 @@ code:hover {
 
 /*Sizing*/
 
-
-table { 
-  table-layout: fixed; }
-
 .hi {
   height: initial;}
 
@@ -555,14 +551,10 @@ table {
   height: inherit;}
 
 .hl {
-<<<<<<< HEAD
-  height: 2.00rem;}
-=======
   height: 2rem;}
 
 .hxl {
   height: 4rem;}
->>>>>>> master
 
 .minw50 {
   min-width: 50%;}
