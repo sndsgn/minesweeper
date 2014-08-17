@@ -88,7 +88,7 @@ var clickLossClear = function(td) {
     $("img", "td:contains('☢')").hide();
     $("td:contains('☢')").removeClass('f0');
     $("td:contains('☢')").addClass('bg-000000');
-    $("#controls").addClass("mtl mbl pt pb fsm bg-000000 ff tac fc-FFFFFF b").text("Sorry, you just blew up, but not in a good way! You'll do better next time!"); 
+    $("#controls").addClass("mtl mbl pt pb fsm bg-000000 ff tac fc-FFFFFF b phl phr").text("Sorry, you just blew up, but not in a good way! You'll do better next time!"); 
     $("#game-check").attr("disabled", "disabled");  
     $("#minesweeper").attr("disabled", "disabled");  
     window.scrollTo(0,0);
@@ -193,7 +193,7 @@ var mineCheck = function() {
   }
   else { 
     //THIS DOESN'T DO ANYTHING. REMOVE IT!!!!!
-    $("#controls").addClass("fm bg-000000 ff tac fc-FFFFFF b").text("Sorry, you flagged incorrectly! You'll do better next time!"); 
+    $("#controls").addClass("fm bg-000000 ff tac fc-FFFFFF b phl phr").text("Sorry, you flagged incorrectly! You'll do better next time!"); 
   }
   $("#game-check").attr("disabled", "disabled");  
   setTimeout(function(){
