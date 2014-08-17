@@ -11,18 +11,20 @@
     <link rel="stylesheet" type="text/css" href="styles.css">
   </head>
   <body>
-
-    <ul class="p0 list-h">
-      <li class="vat"><button class="ff f mts mbs mlm phlm phrm bg-f47503 fc-FFFFFF brdr-n" onclick="location.reload()">New Game</button></li>
-      <li class="vab"><button class="brdr-n ml phll phrl bg-FFFFFF" onclick="mineCheck()" id="game-check"><img class="hxl" src="smiling_yellow.svg" /></button></li>
+    <header id="controls">
+      <h1 class="phlm fm ff txt-brdr">Thumbtack Minesweeper</h1>
+    </header>
+    
+    <ul class="p0 list-h phlm">
+      <li class="vat"><button class="ff f mts mbs phlm phrm bg-f47503 fc-FFFFFF brdr-n" onclick="location.reload()">New Game</button></li>
+      <li class="vab"><button class="brdr-n ml phll bg-FFFFFF" onclick="mineCheck()" id="game-check"><img class="hxl" src="smiling_yellow.svg" /></button></li>
     </ul>
-
-    <div class="mlm" id="controls"></div>
 
     <table id="minesweeper" class="mlm phrm">
     </table>      
 
-      <button class="brdr-n ml phl phr bg-FFFFFF ptm" onclick="showMines()"><img class="hl" src="top-secret.svg" /></button>
+    <button class="brdr-dot fsi brdr-F47503 phl mlm phr bg-FFFFFF pts pbs mbm mtm tal fc-F47503" onclick="showMines()">Top Secret</button>
+
 
   </body>
   <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script> 

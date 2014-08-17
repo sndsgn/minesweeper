@@ -88,7 +88,7 @@ var clickLossClear = function(td) {
     $("img", "td:contains('☢')").hide();
     $("td:contains('☢')").removeClass('f0');
     $("td:contains('☢')").addClass('bg-000000');
-    $("#controls").addClass("fsm bg-000000 ff tac fc-FFFFFF b").text("Sorry, you just blew up, but not in a good way! You'll do better next time!"); 
+    $("#controls").addClass("mtl mbl pt pb fsm bg-000000 ff tac fc-FFFFFF b").text("Sorry, you just blew up, but not in a good way! You'll do better next time!"); 
     $("#game-check").attr("disabled", "disabled");  
     $("#minesweeper").attr("disabled", "disabled");  
     window.scrollTo(0,0);
@@ -98,6 +98,7 @@ var clickLossClear = function(td) {
   }
   if(td.textContent !== "0") {
     $(td).removeClass("f0");
+    $(td).addClass("pbxs ptxs");
     $(td).removeClass("bg-f47503");
     $("img", td).remove();
   }
@@ -110,7 +111,7 @@ var clickLossClear = function(td) {
 //adding flags and losing if mine clicked.
 var clickAction = function(event) {
   document.oncontextmenu = function() {return false;};
-  $('td').mousedown(function(event) {
+  $('td').mouseup(function(event) {
     var imgSrc = $("img", this).attr("src");
     switch (event.which) {
       case 1:
@@ -148,7 +149,7 @@ var visualMatrixJS = function(rows, ind, matrix) {
     document.getElementById("minesweeper").insertRow(i);
     for(j = 0; j < ind; j++) { 
       var tableRow = document.getElementById("minesweeper").getElementsByTagName("tr")[i];
-      tableRow.insertCell(j).className="f b ff minw minh pts pbs tac brdr-sld brdr-sp0 cp f0 fc-F47503 hl";
+      tableRow.insertCell(j).className="f b ff minw minh tac brdr-sld brdr-sp0 cp f0 fc-F47503";
       tableRow.getElementsByTagName("td")[j].setAttribute("onclick", "clickAction(this)");
       tableRow.getElementsByTagName("td")[j].innerHTML=matrix[i][j];
     }
@@ -177,18 +178,28 @@ var mineProximity = function(rows, ind, matrix) {
 //Checks to ensure all mines are flagged properly to display if won or lost
 var mineCheck = function() {
   if ($("img", "td:not(:contains('☢'))").length === 0) { 
-    $("#minesweeper").addClass("fxl bg-f47503 ff tac fc-FFFFFF b").text("WELL PLAYED MINESWEEPER! YOU WIN!"); 
+    $("#controls").addClass("fm bg-f47503 ff tac fc-FFFFFF b").text("WELL PLAYED MINESWEEPER! YOU WIN!"); 
+  setTimeout(function(){
+    location.reload();
+  }, 2500);
+  window.scrollTo(0,0);
   }
   else if($("img", "td:contains('☢')").attr("src") === "thumbtack_reverse.svg" && $("img[src='thumbtack_reverse.svg']", "td:not(:contains('☢'))").length === 0){
-    $("#minesweeper").addClass("fxl bg-f47503 ff tac fc-FFFFFF b").text("WELL PLAYED MINESWEEPER! YOU WIN!"); 
+    $("#controls").addClass("fm bg-f47503 ff tac fc-FFFFFF b").text("WELL PLAYED MINESWEEPER! YOU WIN!"); 
+  setTimeout(function(){
+    location.reload();
+  }, 2500);
+  window.scrollTo(0,0);
   }
   else { 
-    $("#minesweeper").addClass("fxl bg-000000 ff tac fc-FFFFFF b").text("Sorry, you flagged incorrectly! You'll do better next time!"); 
+    //THIS DOESN'T DO ANYTHING. REMOVE IT!!!!!
+    $("#controls").addClass("fm bg-000000 ff tac fc-FFFFFF b").text("Sorry, you flagged incorrectly! You'll do better next time!"); 
   }
   $("#game-check").attr("disabled", "disabled");  
   setTimeout(function(){
     location.reload();
   }, 2500);
+  window.scrollTo(0,0);
 };
 
 //Cheat to show location of mines.
@@ -196,7 +207,7 @@ var showMines = function() {
   var mineImg = $("img", "td:contains('☢')"); 
   var imgSrc = $("img", "td:contains('☢')").attr("src"); 
   $("img", "td:contains('☢')").hide();
-  $("td:contains('☢')").removeClass('f0');
+  $("td:contains('☢')").removeClass("f0");
   if(imgSrc === "thumbtack_reverse.svg" || "question_mark.svg") {
     $("td:contains('☢')").has("img[src='thumbtack_reverse.svg']").removeClass("bg-f47503");
     $("td:contains('☢')").has("img[src='question_mark.svg']").removeClass("bg-f47503");

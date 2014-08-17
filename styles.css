@@ -69,10 +69,10 @@ code:hover {
 .brdr-n {
   border: none;}
 
-.txt-brdr { color: black;
+.txt-brdr { color: #F47503;
             -webkit-text-fill-color: white; /* Will override color (regardless of order) */
-            -webkit-text-stroke-width: 1px;
-            -webkit-text-stroke-color: black;
+            -webkit-text-stroke-width: 2px;
+            -webkit-text-stroke-color: #f47503;
 }
 
 /* { 
@@ -115,6 +115,9 @@ code:hover {
 
 .brdr-000000 {
   border-color: #000000;}
+
+.brdr-F47503 {
+  border-color: #F47503;}
 
 
 
@@ -353,7 +356,6 @@ code:hover {
 .phlxs {
   padding-left: .25rem;}
 
-
 .phlsm {
   padding-left: 1.5rem;}
 
@@ -544,6 +546,9 @@ code:hover {
 
 /*Sizing*/
 
+/*table {
+  table-layout: fixed;}
+*/
 .hi {
   height: initial;}
 
@@ -560,10 +565,10 @@ code:hover {
   min-width: 50%;}
 
 .minh {
-  min-height: 3rem;}
+  min-height: 2.5rem;}
 
 .minw {
-  min-width: 3rem;}
+  min-width: 2.5rem;}
 
 .minw12P3 {
   min-width: 12.3rem;}
@@ -573,6 +578,12 @@ code:hover {
 
 .maxw {
   max-width: 20.85rem;}
+
+.maxw25 {
+  max-width: 25%;}
+
+.maxh25 {
+  max-height: 25%;}
 
 .maxw77 {
   max-width: 77rem;}
@@ -639,7 +650,7 @@ code:hover {
  margin-bottom: 2rem;}
 
 .mbl {
- margin-bottom: 4rem;}
+ margin-bottom: 2rem;}
 
 .mr0 {
   margin-right: 0rem;}
