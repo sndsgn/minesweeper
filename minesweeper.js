@@ -61,7 +61,7 @@ var clickLossClear = function(td) {
             $("img", $("tr:eq("+(rowIter + q)+") td:eq("+(cellIter + p)+")")).remove();
           }                      
           else  if($("tr:eq("+(rowIter + q)+") td:eq("+(cellIter + p)+")").text() === "0"  && $("tr:eq("+(rowIter + q)+") td:eq("+(cellIter + p)+")").has("img").length !== 0) {
-            $("tr:eq("+(rowIter + q)+") td:eq("+(cellIter + p)+")").addClass("f0");
+            $("tr:eq("+(rowIter + q)+") td:eq("+(cellIter + p)+")").addClass("f0 pbxs ptxs").html("&nbsp");
             $("img", "tr:eq("+(rowIter + q)+") td:eq("+(cellIter + p)+")").remove();
             foundZeros[u] = $("tr:eq("+(rowIter + q)+") td:eq("+(cellIter + p)+")")[0];
             u = u + 1;
