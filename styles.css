@@ -622,8 +622,11 @@ code:hover {
 .mts {
   margin-top: .5rem;}
 
-.mtm {
+.mt {
   margin-top: 1rem;}
+
+.mtm {
+  margin-top: 1.5rem;}
 
 .mtl {
   margin-top: 2rem;}
@@ -643,14 +646,14 @@ code:hover {
 .mbxs {
   margin-bottom: .5rem;}
 
-.mbs {
+.mb {
   margin-bottom: 1rem;}
 
 .mbm {
  margin-bottom: 2rem;}
 
 .mbl {
- margin-bottom: 2rem;}
+ margin-bottom: 4rem;}
 
 .mr0 {
   margin-right: 0rem;}
@@ -694,7 +697,7 @@ code:hover {
 .ml {
   margin-left: 1rem;}
 
-.mlx {
+.mlsm {
   margin-left: 1.5rem;}
 
 .mlm {

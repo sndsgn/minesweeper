@@ -12,18 +12,28 @@
   </head>
   <body>
     <header id="controls">
-      <h1 class="phlm fm ff txt-brdr">Thumbtack Minesweeper</h1>
+      <h1 class="phlm fsm ff fc-F47503">Thumbtack Minesweeper</h1>
     </header>
-    
-    <ul class="p0 list-h phlm">
-      <li class="vat"><button class="ff f mts mbs phlm phrm bg-f47503 fc-FFFFFF brdr-n" onclick="location.reload()">New Game</button></li>
-      <li class="vab"><button class="brdr-n ml phll bg-FFFFFF" onclick="mineCheck()" id="game-check"><img class="hxl" src="smiling_yellow.svg" /></button></li>
-    </ul>
+
+    <section class="mlm mrs brdr-sld brdr-F47503 dib mbm"> 
+      <div class="vat fc-F47503 fsm ff phls phrs tac" id="">Mines</div>
+      <div class="vat fc-F47503 fsm ff phls phrs tac" id="MINE-COUNT"></div>
+    </section>
+    <section class="mlm dib mrm mbm">
+      <button class="brdr-n phl bg-FFFFFF" onclick="mineCheck()" id="game-check"><img class="hxl" src="smiling_yellow.svg" /></button>
+    </section>
+    <section class="brdr-sld brdr-F47503 dib mlsm mbm"> 
+      <div class="vat fc-F47503 fsm ff phls phrs tac" id="">Timer</div>
+      <div class="vat fc-F47503 fsm ff phls phrs tac" id=""><span id="TIME-MINUTE">0</span>:<span id="TIME-SECOND">0</span></div>
+    </section>
 
     <table id="minesweeper" class="phlm phrm">
     </table>      
 
-    <button class="brdr-dot fsi brdr-F47503 phl mlm phr bg-FFFFFF pts pbs mbm mtm tal fc-F47503" onclick="showMines()">Top Secret</button>
+    <ul class="p0 list-h phlm">
+      <li class="vat"><button class="ff f mts mbs phlm phrm bg-f47503 fc-FFFFFF brdr-n" onclick="location.reload()">New Game</button></li>
+      <li class="phll"><button class="brdr-dot fsi brdr-F47503 phl mlm phr bg-FFFFFF pts pbs mbm mt tar fc-F47503" onclick="showMines()">Top Secret</button></li>
+    </ul>
 
 
   </body>

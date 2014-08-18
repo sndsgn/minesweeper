@@ -88,7 +88,7 @@ var clickLossClear = function(td) {
     $("img", "td:contains('☢')").hide();
     $("td:contains('☢')").removeClass('f0');
     $("td:contains('☢')").addClass('bg-000000');
-    $("#controls").addClass("mtl mbl pt pb fsm bg-000000 ff tac fc-FFFFFF b phl phr").text("Sorry, you just blew up, but not in a good way! You'll do better next time!"); 
+    $("#controls").addClass("mt mb pts pbs fsm bg-000000 ff tac fc-FFFFFF b phl phr").text("Sorry, you just blew up, but not in a good way! You'll do better next time!"); 
     $("#game-check").attr("disabled", "disabled");  
     $("#minesweeper").attr("disabled", "disabled");  
     window.scrollTo(0,0);
@@ -107,15 +107,61 @@ var clickLossClear = function(td) {
   }
 };
 
+//Mine Count Presentation
+document.getElementById("MINE-COUNT").innerHTML = mines; 
+var mineCounter = function() {
+  var minesFlagged = $("td > img[src='thumbtack_reverse.svg']").length;
+  if(mines !== minesFlagged) {
+    var minesRemaining = mines - minesFlagged;
+    document.getElementById("MINE-COUNT").innerHTML = minesRemaining; 
+  } else { 
+    document.getElementById("MINE-COUNT").innerHTML = 0; 
+  }
+}; 
+
+
+//TIMER
+var timeSec = 1;
+var timeMin = 1; 
+var timeIncrement = function() {
+  if(timeSec === 60) {
+    document.getElementById("TIME-MINUTE").innerHTML = timeMin++; 
+    document.getElementById("TIME-SECOND").innerHTML = 0;
+    timeSec = 0;
+  } 
+  if(timeMin === 60) {
+    $("#controls").addClass("fsm mt bg-000000 ff tac fc-FFFFFF b phl phr").text("Taking your sweet time, huh? Try again."); 
+    setTimeout(function(){
+      location.reload();
+    }, 2500);
+    window.scrollTo(0,0);
+  } else { 
+    document.getElementById("TIME-SECOND").innerHTML = timeSec++;
+  }
+};
+
 //Adds click functionality for removing the image, showing text, clearing free cells,
 //adding flags and losing if mine clicked.
 var clickAction = function(event) {
+/*  $("td").hover(function() { 
+    if($("img", this).attr("src") === "thumbtack.svg") {
+        $("img", this).attr("src", "thumbtack_reverse.svg");
+          $(this).addClass("bg-f47503");
+    }
+  }, function() {
+        $("img", this).attr("src", "thumbtack.svg");
+          $(this).removeClass("bg-f47503");
+  });
+  */
   document.oncontextmenu = function() {return false;};
   $('td').mouseup(function(event) {
     var imgSrc = $("img", this).attr("src");
     switch (event.which) {
       case 1:
         clickLossClear(this);
+        if(timeSec === 1 && timeMin === 1) {
+        var time = window.setInterval("timeIncrement()", 1000);
+        }
         break;
       case 2:
         alert('Middle Mouse button pressed.');
@@ -124,6 +170,7 @@ var clickAction = function(event) {
         if(imgSrc === "thumbtack.svg") {  
           $("img", this).attr("src", "thumbtack_reverse.svg");
           $(this).addClass("bg-f47503");
+          mineCounter();
         }
         if(imgSrc === "thumbtack_reverse.svg") {
           $("img", this).attr("src", "question_mark.svg");
@@ -192,8 +239,7 @@ var mineCheck = function() {
   window.scrollTo(0,0);
   }
   else { 
-    //THIS DOESN'T DO ANYTHING. REMOVE IT!!!!!
-    $("#controls").addClass("fm bg-000000 ff tac fc-FFFFFF b phl phr").text("Sorry, you flagged incorrectly! You'll do better next time!"); 
+    $("#controls").addClass("fsm mt bg-000000 ff tac fc-FFFFFF b phl phr").text("Sorry, you flagged incorrectly! You'll do better next time!"); 
   }
   $("#game-check").attr("disabled", "disabled");  
   setTimeout(function(){
