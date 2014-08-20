@@ -323,6 +323,9 @@ code:hover {
 .pt {
 	padding-top: 1rem;}
 
+.pt0 {
+	padding-top: 0rem;}
+
 .ptsm {
   padding-top: .75rem;}
 
@@ -340,6 +343,9 @@ code:hover {
 
 .pb {
   padding-bottom: 1rem;}
+
+.pb0 {
+	padding-bottom: 0rem;}
 
 .pbm {
   padding-bottom: 2rem;}
@@ -456,7 +462,7 @@ code:hover {
 	font-size: 0rem;}
 
 .ff {   
-       font-family: avenir, sans-serif;}	
+       font-family: 'Avenir Next', 'Helvetica Neue', Helvetica, Arial, sans-serif;}	
 
 
 
